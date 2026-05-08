@@ -428,24 +428,84 @@ LLM 也是这样：它把之前计算过的中间结果（Key 和 Value 向量�
 
 ---
 
-## Phase 5：生产化（2-3 周） 📋 待规划
+## Phase 5：生产化（2-3 周） ✅ 已实现
 
-> 目标：能设计、部署、运维一个真实的 LLM 服务。
+> 目标：把之前写的聊天脚本，变成能上线的东西。
 
-### 你要回答的核心问题
+### 四个实战项目
 
-1. **成本：** 一次对话花了多少钱？（输入 token × 输入单价 + 输出 token × 输出单价）
-2. **延迟：** 用户等了多久？首 token 延迟和总延迟哪个更重要？
-3. **并发：** 10 个用户同时用，系统撑得住吗？
-4. **安全：** 用户输入能"控制"模型行为吗？（Prompt Injection）
-5. **监控：** 怎么知道模型回答质量在变差？
+| Track | 项目 | 文件 | 核心问题 |
+|-------|------|------|---------|
+| **5A** | 结构化日志 | `production-demo/logger.py` | print() 不是日志。怎么记录、查询、聚合？ |
+| **5B** | 成本追踪 | `production-demo/cost.py` | 一次对话花了多少钱？累积了多少？ |
+| **5C** | 并发压测 | `production-demo/loadtest.py` | 10 个人同时用，系统撑得住吗？瓶颈在哪？ |
+| **5D** | API 网关 | `production-demo/gateway.py` | 怎么把 LLM 调用封装成可上线的服务？ |
 
-### 计划内容
+### Track 5A：结构化日志（logger.py）
 
-- 结构化日志（JSON log，可工具解析）
-- 成本追踪（每次请求统计 token 消耗和花费）
-- 基本安全（输入过滤、Rate Limiting、API Key 管理）
-- 模型版本管理（怎么切换、怎么回滚）
+**核心：** 每次 LLM 请求记录一行 JSON（JSON Lines 格式），包含时间戳、模型、provider、token 数、延迟、是否成功、花费。
+
+`print()` 是给人看的，JSON 日志是给工具分析的——可以 `grep`、`jq`、导入 Pandas、喂给日志平台。
+
+**你会学到：**
+- JSON Lines 格式（每行一个独立 JSON，追加写入，不怕 crash）
+- 日志聚合分析（按 provider 分组、计算 P95 延迟、错误率）
+- 一个 `summary()` 方法就能看出：哪个 provider 最慢？错误率多少？花了多少钱？
+
+### Track 5B：成本追踪（cost.py）
+
+**核心：** 一个多 provider 成本计算器，内置 DeepSeek、OpenAI 的实时定价。
+
+输入 token 数和输出 token 数 → 算出这次请求花了多少钱。支持缓存命中折扣（DeepSeek 的 cache hit 半价）。
+
+**你会学到：**
+- 云 API 的计费模型：输入价 vs 输出价 vs 缓存命中价
+- 降本技巧：缓存命中、选便宜模型、缩短 system prompt
+- 累积成本追踪：聊了 100 轮之后一共花了几块钱？
+
+### Track 5C：并发负载测试（loadtest.py）
+
+**核心：** 用 asyncio 并发发送大量请求，模拟真实用户负载。
+
+和 Phase 1 的 `benchmark.py` 的区别：benchmark 是串行的（一次一个），loadtest 是并发的（多个同时发）。
+
+**你会学到：**
+- 并发 vs 串行的延迟差异
+- P50 / P95 / P99 延迟分布（不只是平均值）
+- 吞吐量（req/s）和生成速度（token/s）
+- 什么并发量下系统开始拒绝请求（HTTP 429 / 超时）
+
+### Track 5D：API 网关（gateway.py）
+
+**核心：** 一个基于 FastAPI 的最小 LLM API 网关，具备三个生产必需功能：
+
+1. **API Key 鉴权** — 验证调用方身份
+2. **Token Bucket 限流** — 每分钟最多 N 次请求
+3. **结构化日志** — 每次请求自动记录
+
+架构：
+```
+客户端 → Gateway (localhost:8000) → 上游 LLM (DeepSeek / Ollama)
+              │
+              ├─ 鉴权中间件（Bearer Token）
+              ├─ 限流中间件（Token Bucket）
+              ├─ JSON Lines 日志
+              └─ SSE 流式透传
+```
+
+**你会学到：**
+- FastAPI 中间件模式（鉴权、限流都是中间件）
+- Token Bucket 算法的实现（每秒补充令牌，每次消耗一个）
+- SSE 流式透传的注意事项（边读边写，不缓冲）
+- 为什么生产网关用 Kong / Nginx（这个 gateway 是学习工具，不是生产方案）
+
+### Phase 5 验收
+
+- [ ] logger.py 能记录结构化日志，日志可以 `grep` 也可以用 Python 分析
+- [ ] cost.py 能计算一次对话的费用，支持至少 2 个 provider
+- [ ] loadtest.py 能并发 5+ 请求，输出 P50/P95/P99 延迟和吞吐量
+- [ ] gateway.py 能作为中间层代理，具备鉴权和限流
+- [ ] 能回答：你的服务在多大并发下开始明显变慢？瓶颈在哪？
 
 ---
 

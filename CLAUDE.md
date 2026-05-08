@@ -57,6 +57,14 @@ G:\AI学习路径\
     │   ├── README.md
     │   └── requirements.txt
     │
+    ├── production-demo/                # Phase 5: Production
+    │   ├── logger.py                   #   Structured JSON logging
+    │   ├── cost.py                     #   Multi-provider cost tracker
+    │   ├── loadtest.py                 #   Concurrent load testing
+    │   ├── gateway.py                  #   Minimal LLM API gateway
+    │   ├── README.md
+    │   └── requirements.txt
+    │
     ├── 大模型自顶向下图解.md              # LLM architecture diagram
     └── 短视频文案-普通工程师学大模型.md
 ```
@@ -73,7 +81,7 @@ The complete learning roadmap is in `LLM学习路径_完整版.md` (7 layers, Pr
 | 2 | Inference — llama.cpp, KV Cache, experiments | ✅ Complete | `llama-cpp-notes/` (3 files) |
 | 3 | Frameworks — RAG, Agent, Function Calling | ✅ Complete | `rag-demo/rag.py`, `agent-demo/agent.py` |
 | 4 | Customization — Prompt Engineering, LoRA | ✅ Complete | `finetune-demo/` (3 files) |
-| 5 | Production Engineering — perf, cost, observability | 📋 Planned | — |
+| 5 | Production Engineering — logging, cost, load testing, gateway | ✅ Complete | `production-demo/` (4 files) |
 | 6 | Advanced — Transformer, training, multimodal | 🔭 Future | — |
 
 ## Key Architecture

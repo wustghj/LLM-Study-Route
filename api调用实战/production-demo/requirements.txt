@@ -1,0 +1,11 @@
+# production-demo — Phase 5 依赖
+
+# logger.py 和 cost.py：无外部依赖（纯标准库）
+
+# loadtest.py
+aiohttp>=3.9
+
+# gateway.py
+fastapi>=0.110
+uvicorn>=0.29
+aiohttp>=3.9

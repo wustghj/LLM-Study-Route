@@ -4,7 +4,12 @@
       "Bash(python -c \"import ast; ast.parse\\(open\\('main.py', encoding='utf-8'\\).read\\(\\)\\); print\\('main.py ✅'\\)\")",
       "Bash(python -c \"import ast; ast.parse\\(open\\('raw_client.py', encoding='utf-8'\\).read\\(\\)\\); print\\('raw_client.py ✅'\\)\")",
       "Bash(python -c \"import ast; ast.parse\\(open\\('benchmark.py', encoding='utf-8'\\).read\\(\\)\\); print\\('benchmark.py ✅'\\)\")",
-      "Bash(python -c 'import ast; ast.parse\\(open\\('\\\\''__TRACKED_VAR__'\\\\'', encoding='\\\\''utf-8'\\\\''\\).read\\(\\)\\)')"
+      "Bash(python -c 'import ast; ast.parse\\(open\\('\\\\''__TRACKED_VAR__'\\\\'', encoding='\\\\''utf-8'\\\\''\\).read\\(\\)\\)')",
+      "Bash(git remote *)",
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "Bash(python *)",
+      "Bash(git add *)"
     ]
   }
 }
