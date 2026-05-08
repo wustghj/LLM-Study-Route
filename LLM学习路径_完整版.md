@@ -45,6 +45,18 @@
 
 > 目标：用 DeepSeek 完成一次对话。不解释原理，先建立"它是什么"的体感。
 
+### 第 0 步：准备工作（一次性，5 分钟）
+
+你需要先装好 Python（3.10 或更高版本）：
+
+```powershell
+# 检查 Python 装了没
+python --version
+# 应该显示 Python 3.10+。如果显示 2.x 或"找不到命令"，先去 python.org 下载安装。
+```
+
+> 安装 Python 时，**一定要勾选 "Add Python to PATH"**——不然终端里找不到 `python` 命令。
+
 ### 第 1 步：获取 API Key（1 分钟）
 
 打开 [DeepSeek 开放平台](https://platform.deepseek.com)，注册账号，获取一个 API Key（形如 `sk-xxxxxxxx`）。
@@ -103,7 +115,7 @@ python main.py --config config.example.toml
 ### 0.2 端到端：一次对话到底发生了什么
 
 ```
-你输入："用一句话解释什么是注意力机制"
+你输入："用一句话解释什么是缓存"
   │
   ▼
 ┌──────────────────────────────────────────────────────┐
@@ -151,6 +163,18 @@ python main.py --config config.example.toml
 | **贵不贵** | 每 1000 token 的价格 | 查 API 定价页 |
 
 > 本项目的 CLI 客户端每次回答后都输出 `first_token_ms` 和 `total_ms`，帮你建立"延迟"的体感。
+
+### Phase 0 扩展阅读
+
+读完 Phase 0，你可能对这些概念还有疑问。这里有深度文章：
+
+| 概念 | 深度文章 | 适合什么时候读 |
+|------|---------|--------------|
+| Token 到底是什么？为什么中文比英文贵？ | `concepts/tokenization-explained.md` | 现在就可以 |
+| Embedding 到底在做什么？ | `concepts/embedding-explained.md` | 现在就可以 |
+| 模型是怎么训练出来的？ | `concepts/training-story.md` | 开始 Phase 2 之前 |
+| 怎么写出更好的 prompt？ | `howto/prompt-engineering-cookbook.md` | 开始 Phase 1 之前 |
+| 常见困惑和误解 | `faq.md` | 随时查阅 |
 
 ### Phase 0 验收
 

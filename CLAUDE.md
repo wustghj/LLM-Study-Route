@@ -12,9 +12,19 @@ A hands-on LLM learning project designed for pure beginners (and backend enginee
 G:\AI学习路径\
 │
 ├── README.md                           # Project entry point
+├── LLM从零到懂-完整指南.md                # 30-minute narrative guide (beginner onramp)
 ├── LLM学习路径_完整版.md                 # Complete 6-phase learning roadmap
-├── CLAUDE.md                           # This file
+├── faq.md                               # 20 most common beginner questions
+├── CLAUDE.md                            # This file
 ├── .gitignore
+│
+├── concepts/                            # Concept deep-dives
+│   ├── tokenization-explained.md        #   Why "I love you" is 3 tokens but "我爱你" is 5
+│   ├── embedding-explained.md           #   How words become vectors
+│   └── training-story.md                #   3-stage training: pretrain → SFT → RLHF
+│
+├── howto/                               # Practical guides
+│   └── prompt-engineering-cookbook.md   #   10 prompt techniques with before/after
 │
 └── api调用实战/
     │

@@ -19,6 +19,8 @@ python main.py --config config.example.toml
 
 输入一个问题，看屏幕上逐字出现回答，完成你的第一次 LLM API 调用。
 
+> **零基础？** 先花 30 分钟读 `LLM从零到懂-完整指南.md`，彻底搞懂 LLM 是什么再动手。
+
 ## 这个项目是什么
 
 这是一个**动手实践导向**的 LLM（大语言模型）学习项目。它的核心思路是：
@@ -88,7 +90,17 @@ api调用实战/
 │   ├── minimal_transformer.py        #   手写 Transformer 前向传播
 │   └── llama-cpp-source-guide.md     #   llama.cpp 源码阅读路线
 │
-├── LLM学习路径_完整版.md              #   完整学习路线图（从这里开始）
+├── concepts/                         # 概念深度解析
+│   ├── tokenization-explained.md     #   Token 到底是什么
+│   ├── embedding-explained.md        #   Embedding 到底在做什么
+│   └── training-story.md             #   模型是怎么训练出来的
+│
+├── howto/                            # 实用指南
+│   └── prompt-engineering-cookbook.md #  Prompt 技巧速查
+│
+├── LLM从零到懂-完整指南.md            #   30 分钟通读版（推荐新手先看这个）
+├── LLM学习路径_完整版.md              #   完整学习路线图
+├── faq.md                            #   20 个最常见问题
 └── README.md                         #   你正在看的文件
 ```
 
