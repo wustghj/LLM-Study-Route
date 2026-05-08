@@ -21,7 +21,7 @@
 ### 方法 1：用项目自带的 benchmark 工具
 
 ```powershell
-cd api调用实战/cli-chat
+cd phase1-api/cli-chat
 python benchmark.py --prompt medium --runs 3
 ```
 

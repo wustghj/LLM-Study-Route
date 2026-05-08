@@ -134,7 +134,7 @@ Temperature 控制随机程度：
 什么都不确定，先试试 → Prompt Engineering（零成本）
 ```
 
-详见 `LLM从零到懂-完整指南.md` 第 9 章。
+详见 `START-HERE.md` 第 9 章。
 
 ---
 
@@ -235,8 +235,8 @@ GGUF 是 llama.cpp 用的模型文件格式。它把模型的架构（多少层�
 
 ### Q20：下一步我应该学什么？
 
-1. 刚接触 → 读 `LLM从零到懂-完整指南.md`（30 分钟）
+1. 刚接触 → 读 `START-HERE.md`（30 分钟）
 2. 想动手 → 跑 `README.md` 的 5 分钟快速开始
-3. 想系统学 → 跟 `LLM学习路径_完整版.md` 走 6 个 Phase
+3. 想系统学 → 跟 `LEARNING-PATH.md` 走 6 个 Phase
 4. 有具体困惑 → 查本文档
-5. 想写更好的 prompt → 看 `howto/prompt-engineering-cookbook.md`
+5. 想写更好的 prompt → 看 `guides/prompt-engineering.md`

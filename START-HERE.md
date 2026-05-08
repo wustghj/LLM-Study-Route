@@ -354,7 +354,7 @@ for chunk in response:
 
 适合：把 LLM 集成到你的应用里，批量处理，做自动化。
 
-> 本项目 Phase 1 的 `cli-chat/main.py` 就是这个方式。跑一遍就懂。
+> 本项目 Phase 1 的 `phase1-api/cli-chat/main.py` 就是这个方式。跑一遍就懂。
 
 ### 方式 3：本地部署（最高自由，但也最麻烦）
 
@@ -397,7 +397,7 @@ RAG：             你问 → 先搜索你的文档库 → 找到相关内容
 
 **用 RAG 的场景：** 公司内部知识库问答、产品文档助手、基于特定书籍/法规的回答。
 
-**本项目：** `rag-demo/rag.py`，跑 `--compare` 看差异。
+**本项目：** `phase3-frameworks/rag/rag.py`，跑 `--compare` 看差异。
 
 ### Agent（智能体）——让它能做事
 
@@ -412,7 +412,7 @@ Agent：           你说"帮我算 12345 × 6789"
 
 **用 Agent 的场景：** 需要调用外部工具（搜索、计算、发邮件、操作数据库）、需要多步骤推理的任务。
 
-**本项目：** `agent-demo/agent.py`。
+**本项目：** `phase3-frameworks/agent/agent.py`。
 
 ### 微调（Fine-tuning）——改变它的说话方式
 
@@ -425,7 +425,7 @@ Agent：           你说"帮我算 12345 × 6789"
 
 **用微调的场景：** 想要特定的说话风格、特定领域的专业术语、固定的输出格式。
 
-**本项目：** `finetune-demo/train.py`。
+**本项目：** `phase4-finetuning/finetune/train.py`。
 
 ### 怎么选
 
@@ -447,16 +447,16 @@ Agent：           你说"帮我算 12345 × 6789"
 
 ### 如果你想动手（推荐）
 → 打开 `README.md`，5 分钟跑通第一次 API 调用
-→ 然后按 `LLM学习路径_完整版.md` 的 6 个 Phase 逐步深入
+→ 然后按 `LEARNING-PATH.md` 的 6 个 Phase 逐步深入
 
 ### 如果你想深挖某个概念
-→ `concepts/tokenization-explained.md` — Token 的方方面面
-→ `concepts/embedding-explained.md` — 向量为什么能"理解"语义
-→ `concepts/training-story.md` — 训练的三个阶段详解
+→ `concepts/tokenization.md` — Token 的方方面面
+→ `concepts/embedding.md` — 向量为什么能"理解"语义
+→ `concepts/training.md` — 训练的三个阶段详解
 
 ### 如果你遇到困惑
 → `faq.md` — 新手最常问的 20 个问题
 
 ### 如果你想成为专家
-→ `advanced-notes/minimal_transformer.py` — 手写一遍 Transformer
-→ `advanced-notes/llama-cpp-source-guide.md` — 读 C++ 推理引擎源码
+→ `phase6-advanced/transformer.py` — 手写一遍 Transformer
+→ `phase6-advanced/llama-cpp-guide.md` — 读 C++ 推理引擎源码

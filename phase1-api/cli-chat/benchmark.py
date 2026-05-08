@@ -54,7 +54,7 @@ def load_providers(toml_path: str = "config.toml") -> list[dict[str, str]]:
     path = Path(toml_path)
     if not path.exists():
         print(f"错误：找不到配置文件 {toml_path}")
-        print("请先在 cli-chat/ 目录下运行此脚本")
+        print("请先在 phase1-api/cli-chat/ 目录下运行此脚本")
         sys.exit(1)
 
     with path.open("rb") as f:

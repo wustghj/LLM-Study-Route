@@ -25,7 +25,7 @@ Agent = 能说话 + 能调工具 + 能根据结果决定下一步。
 
 ```powershell
 # 不需要额外依赖，用 CLI 客户端已有的 openai 包
-cd api调用实战/agent-demo
+cd phase3-frameworks/agent
 ```
 
 ## 运行

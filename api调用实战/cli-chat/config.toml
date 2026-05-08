@@ -1,0 +1,23 @@
+# DeepSeek
+api_key = "$DEEPSEEK_API_KEY"
+base_url = "https://api.deepseek.com"
+model = "deepseek-chat"
+
+# OpenAI
+# api_key = "$OPENAI_API_KEY"
+# base_url = "https://api.openai.com/v1"
+# model = "gpt-4o-mini"
+
+# Ollama OpenAI-Compatible API
+# api_key = "ollama"
+# base_url = "http://localhost:11434/v1"
+# model = "qwen2.5:7b"
+
+# Local proxy
+# api_key = "$PROXY_API_KEY"
+# base_url = "http://localhost:3000/v1"
+# model = "deepseek-chat"
+
+system_prompt = "你是一个简洁、可靠的编程助手。"
+temperature = 0.7
+max_tokens = 2048

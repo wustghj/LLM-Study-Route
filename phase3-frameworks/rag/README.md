@@ -28,7 +28,7 @@ RAG = 先搜后问。
 
 ```powershell
 # 安装依赖（首次运行会自动下载约 400MB 的 embedding 模型）
-cd api调用实战/rag-demo
+cd phase3-frameworks/rag
 pip install -r requirements.txt
 ```
 

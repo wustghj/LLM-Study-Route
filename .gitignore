@@ -8,10 +8,10 @@ __pycache__/
 env/
 
 # API keys and config
-api调用实战/cli-chat/config.toml
+phase1-api/cli-chat/config.toml
 
 # Conversation history
-api调用实战/cli-chat/conversations/
+phase1-api/cli-chat/conversations/
 
 # IDE
 .vscode/

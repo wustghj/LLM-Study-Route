@@ -174,7 +174,7 @@ max_tokens = 2048
 ```
 
 ```powershell
-cd api调用实战/cli-chat
+cd ../../phase1-api/cli-chat
 python main.py --config config.toml
 ```
 

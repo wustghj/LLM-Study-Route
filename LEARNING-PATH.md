@@ -74,7 +74,7 @@ $env:DEEPSEEK_API_KEY = "sk-你的key"
 ### 第 3 步：跑一次对话（3 分钟）
 
 ```powershell
-cd api调用实战/cli-chat
+cd phase1-api/cli-chat
 pip install openai tomli
 python main.py --config config.example.toml
 ```
@@ -170,10 +170,10 @@ python main.py --config config.example.toml
 
 | 概念 | 深度文章 | 适合什么时候读 |
 |------|---------|--------------|
-| Token 到底是什么？为什么中文比英文贵？ | `concepts/tokenization-explained.md` | 现在就可以 |
-| Embedding 到底在做什么？ | `concepts/embedding-explained.md` | 现在就可以 |
-| 模型是怎么训练出来的？ | `concepts/training-story.md` | 开始 Phase 2 之前 |
-| 怎么写出更好的 prompt？ | `howto/prompt-engineering-cookbook.md` | 开始 Phase 1 之前 |
+| Token 到底是什么？为什么中文比英文贵？ | `concepts/tokenization.md` | 现在就可以 |
+| Embedding 到底在做什么？ | `concepts/embedding.md` | 现在就可以 |
+| 模型是怎么训练出来的？ | `concepts/training.md` | 开始 Phase 2 之前 |
+| 怎么写出更好的 prompt？ | `guides/prompt-engineering.md` | 开始 Phase 1 之前 |
 | 常见困惑和误解 | `faq.md` | 随时查阅 |
 
 ### Phase 0 验收
@@ -202,7 +202,7 @@ python main.py --config config.example.toml
 
 ### Track 1A：用 SDK 调用 API（1 天） ✅ 已完成
 
-**做什么：** 跑通 `cli-chat/main.py`
+**做什么：** 跑通 `phase1-api/cli-chat/main.py`
 
 **你学到的：**
 - 什么是 API Key 鉴权
@@ -217,7 +217,7 @@ python main.py --config config.example.toml
 
 ### Track 1B：不用 SDK，手写 HTTP（1 天） ✅ 已完成
 
-**做什么：** 跑通 `cli-chat/raw_client.py`
+**做什么：** 跑通 `phase1-api/cli-chat/raw_client.py`
 
 **为什么要做：** SDK 帮你封装了很多细节。要真正理解协议，你需要自己写一遍。
 
@@ -252,7 +252,7 @@ ollama run qwen2.5:7b
 
 ### Track 1D：多 Provider 性能对比（0.5 天） ✅ 已完成
 
-**做什么：** 运行 `cli-chat/benchmark.py`，拿到 CSV 数据
+**做什么：** 运行 `phase1-api/cli-chat/benchmark.py`，拿到 CSV 数据
 
 **你学到的：**
 - 同一个 prompt，DeepSeek 可能 300ms 出第一个字，本地 Ollama 要 5 秒——为什么？
@@ -286,7 +286,7 @@ ollama run qwen2.5:7b
 
 **一句话：** llama.cpp 是 Ollama 的底层引擎，纯 C/C++ 写的推理框架。
 
-**你学到的（`llama-cpp-notes/getting-started.md`）：**
+**你学到的（`phase2-inference/llama-cpp/getting-started.md`）：**
 - GGUF 文件是什么（量化打包后的模型文件，一个文件包含所有权重）
 - 量化等级怎么看（Q2_K < Q4_K_M < Q8_0，数字越大质量越好、文件越大）
 - `-c`（上下文大小）、`-ngl`（GPU 层数）、`-t`（线程数）的作用
@@ -295,7 +295,7 @@ ollama run qwen2.5:7b
 
 **核心问题：** 为什么对话越长越慢？为什么上下文不能无限长？
 
-**直觉理解（`llama-cpp-notes/kv-cache-deep-dive.md`）：**
+**直觉理解（`phase2-inference/llama-cpp/kv-cache.md`）：**
 
 想象你在写一篇文章。每写一句，你不需要重新读一遍全文——你记得前面写了什么。
 
@@ -310,7 +310,7 @@ LLM 也是这样：它把之前计算过的中间结果（Key 和 Value 向量�
 
 ### Track 2C：动手做实验 ✅ 已完成
 
-**做什么：** 按 `llama-cpp-notes/experiments.md` 的 6 个实验跑一遍
+**做什么：** 按 `phase2-inference/llama-cpp/experiments.md` 的 6 个实验跑一遍
 
 **核心实验：**
 | 实验 | 变量 | 你会看到什么 |
@@ -353,7 +353,7 @@ LLM 也是这样：它把之前计算过的中间结果（Key 和 Value 向量�
 
 > 🧠 **核心理解：** RAG 不是让模型变聪明，而是**让模型看到它本来不知道的信息**。本质上是在 prompt 里偷偷塞了一份参考答案。
 
-**项目：** `rag-demo/rag.py`
+**项目：** `phase3-frameworks/rag/rag.py`
 
 你会在代码里看到：
 - 文档分块（chunking）——为什么不能把整本书塞进去？
@@ -389,7 +389,7 @@ LLM 也是这样：它把之前计算过的中间结果（Key 和 Value 向量�
 
 > 🧠 **核心理解：** LLM 只负责**决策**（"我该调用什么工具？用什么参数？"），不负责**执行**。执行是你写的代码。
 
-**项目：** `agent-demo/agent.py`
+**项目：** `phase3-frameworks/agent/agent.py`
 
 你会看到：
 - 工具定义（JSON Schema）——告诉模型"你可以用这些工具"
@@ -431,7 +431,7 @@ LLM 也是这样：它把之前计算过的中间结果（Key 和 Value 向量�
 
 就像给一本已经写好的书加一些便利贴——书本身不改，但贴上便利贴后阅读体验变了。
 
-**项目：** `finetune-demo/`（三阶段流水线）
+**项目：** `phase4-finetuning/finetune/`（三阶段流水线）
 
 1. `prepare_data.py` —— 生成 200 条训练数据，教你用"简洁 C++ 工程师口吻"回复
 2. `train.py` —— QLoRA（4bit 量化 + LoRA），~4GB 显存就能跑
@@ -460,10 +460,10 @@ LLM 也是这样：它把之前计算过的中间结果（Key 和 Value 向量�
 
 | Track | 项目 | 文件 | 核心问题 |
 |-------|------|------|---------|
-| **5A** | 结构化日志 | `production-demo/logger.py` | print() 不是日志。怎么记录、查询、聚合？ |
-| **5B** | 成本追踪 | `production-demo/cost.py` | 一次对话花了多少钱？累积了多少？ |
-| **5C** | 并发压测 | `production-demo/loadtest.py` | 10 个人同时用，系统撑得住吗？瓶颈在哪？ |
-| **5D** | API 网关 | `production-demo/gateway.py` | 怎么把 LLM 调用封装成可上线的服务？ |
+| **5A** | 结构化日志 | `phase5-production/logger.py` | print() 不是日志。怎么记录、查询、聚合？ |
+| **5B** | 成本追踪 | `phase5-production/cost.py` | 一次对话花了多少钱？累积了多少？ |
+| **5C** | 并发压测 | `phase5-production/loadtest.py` | 10 个人同时用，系统撑得住吗？瓶颈在哪？ |
+| **5D** | API 网关 | `phase5-production/gateway.py` | 怎么把 LLM 调用封装成可上线的服务？ |
 
 ### Track 5A：结构化日志（logger.py）
 
@@ -547,8 +547,8 @@ Phase 1-5 是"用和造"——调 API、跑推理、构建应用、做网关。P
 
 | Track | 专题 | 方式 | 产出 |
 |-------|------|------|------|
-| **6A** | Transformer 架构 | 手写 numpy 前向传播 | `advanced-notes/minimal_transformer.py` |
-| **6B** | llama.cpp 源码 | 按路线图阅读 C++ 源码 | `advanced-notes/llama-cpp-source-guide.md` |
+| **6A** | Transformer 架构 | 手写 numpy 前向传播 | `phase6-advanced/transformer.py` |
+| **6B** | llama.cpp 源码 | 按路线图阅读 C++ 源码 | `phase6-advanced/llama-cpp-guide.md` |
 | **6C** | 训练原理 | 理解三阶段训练流程 | 阅读笔记 |
 | **6D** | 模型压缩与部署 | 量化/蒸馏/ONNX 概念 | 阅读笔记 |
 
@@ -556,7 +556,7 @@ Phase 1-5 是"用和造"——调 API、跑推理、构建应用、做网关。P
 
 **做什么：** 用纯 numpy 实现 Transformer 的一次推理（不含训练），打印每一步的数据形状，让你看到 Attention 到底在算什么。
 
-**文件：** `advanced-notes/minimal_transformer.py`
+**文件：** `phase6-advanced/transformer.py`
 
 **你会看到：**
 - token → embedding 查表 → + 位置编码
@@ -569,15 +569,15 @@ Phase 1-5 是"用和造"——调 API、跑推理、构建应用、做网关。P
 
 ```powershell
 pip install numpy
-cd api调用实战/advanced-notes
-python minimal_transformer.py
+cd phase6-advanced
+python transformer.py
 ```
 
 ### Track 6B：阅读 llama.cpp 源码
 
 **做什么：** 用 C++ 后端工程师的身份，读业界最流行的推理引擎源码。
 
-**文件：** `advanced-notes/llama-cpp-source-guide.md`
+**文件：** `phase6-advanced/llama-cpp-guide.md`
 
 **五站阅读路线：**
 
@@ -644,7 +644,7 @@ RLHF / DPO（对齐）
 
 ### Phase 6 验收
 
-- [ ] 能对着 `minimal_transformer.py` 的每一步说出"数据是什么形状、在做什么运算"
+- [ ] 能对着 `phase6-advanced/transformer.py` 的每一步说出"数据是什么形状、在做什么运算"
 - [ ] 能用一句话解释 Self-Attention：Q 和 K 算相似度 → softmax 变概率 → 加权取 V
 - [ ] 能在 llama.cpp 源码中找到 `llama_decode()` 和 KV Cache 结构体
 - [ ] 能说出训练三阶段各自的输入、目标和产出
@@ -715,36 +715,42 @@ RLHF / DPO（对齐）
 ## 附录 C：项目目录总览
 
 ```
-api调用实战/
+├── START-HERE.md                        ← 纯小白入口
+├── LEARNING-PATH.md                     ← 你正在看的文件
+├── FAQ.md                               ← 常见问题速查
+├── README.md                            ← 项目入口
 │
-├── cli-chat/                         # Phase 1：API 调用客户端
-│   ├── main.py                       #   SDK 版多轮对话
-│   ├── raw_client.py                 #   纯 HTTP 版（手写协议）
-│   ├── benchmark.py                  #   多 provider 性能对比
-│   ├── config.toml / config.example.toml
-│   └── conversations/                #   对话存档
+├── concepts/                            ← 概念深度解析
+│   ├── llm-architecture.md                  LLM 架构全景图
+│   ├── tokenization.md                      Token 完全解释
+│   ├── embedding.md                         Embedding 完全解释
+│   └── training.md                          训练三阶段故事
 │
-├── proxy-test/                       # Phase 1：代理验证
-│   ├── test_chat.py / test_stream.py
+├── guides/                              ← 实用技巧
+│   └── prompt-engineering.md                10 个 Prompt 技巧
 │
-├── ollama-notes/                     # Phase 1：本地部署笔记
-│   ├── windows-setup.md
-│   └── model-benchmark.md
+├── phase1-api/                          ← Phase 1：应用与生态
+│   ├── cli-chat/                            SDK + 纯 HTTP 客户端
+│   ├── proxy-test/                          代理测试脚本
+│   └── ollama/                              本地模型部署笔记
 │
-├── llama-cpp-notes/                  # Phase 2：推理引擎笔记
-│   ├── getting-started.md            #   编译与运行
-│   ├── kv-cache-deep-dive.md         #   KV Cache 深度解析
-│   └── experiments.md                #   对照实验设计
+├── phase2-inference/                    ← Phase 2：推理引擎
+│   └── llama-cpp/                           编译 / KV Cache / 6 个实验
 │
-├── rag-demo/                         # Phase 3：RAG 系统
-│   └── rag.py
+├── phase3-frameworks/                   ← Phase 3：应用框架
+│   ├── rag/                                 RAG 检索增强生成
+│   └── agent/                               Agent 智能体
 │
-├── agent-demo/                       # Phase 3：Agent 系统
-│   └── agent.py
+├── phase4-finetuning/                   ← Phase 4：模型微调
+│   └── finetune/                            QLoRA 训练流水线
 │
-├── finetune-demo/                    # Phase 4：微调流水线
-│   ├── prepare_data.py / train.py / inference.py
+├── phase5-production/                   ← Phase 5：生产化
+│   ├── logger.py                            结构化日志
+│   ├── cost.py                              成本计算器
+│   ├── loadtest.py                          并发压测
+│   └── gateway.py                           API 网关
 │
-├── LLM学习路径_完整版.md              # ← 你正在看的文件
-└── README.md                         #   项目入口
+└── phase6-advanced/                     ← Phase 6：进阶
+    ├── transformer.py                       手写 Transformer
+    └── llama-cpp-guide.md                   C++ 推理引擎源码阅读
 ```

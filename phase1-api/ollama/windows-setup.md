@@ -121,7 +121,7 @@ curl.exe -X POST http://localhost:11434/api/chat `
 
 ## 5. 把你的 CLI 客户端接上 Ollama
 
-修改 `cli-chat/config.toml`（只需要改 3 行）：
+修改 `phase1-api/cli-chat/config.toml`（只需要改 3 行）：
 
 ```toml
 api_key = "ollama"                          # Ollama 不需要真的 API Key
@@ -132,7 +132,7 @@ model = "qwen2.5:7b"                        # 你下载的模型名
 然后运行：
 
 ```powershell
-cd api调用实战/cli-chat
+cd phase1-api/cli-chat
 python main.py --config config.toml
 ```
 

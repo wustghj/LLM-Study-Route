@@ -61,7 +61,7 @@ production-demo/
 
 **运行：**
 ```powershell
-cd api调用实战/production-demo
+cd phase5-production
 python logger.py
 ```
 

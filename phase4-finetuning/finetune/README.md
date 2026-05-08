@@ -42,7 +42,7 @@
 ## 安装
 
 ```powershell
-cd api调用实战/finetune-demo
+cd phase4-finetuning/finetune
 
 # 建议用单独虚拟环境（依赖比较多）
 python -m venv .venv

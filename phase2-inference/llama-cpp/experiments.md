@@ -45,7 +45,7 @@ ollama list
 # model = "qwen2.5:7b"
 # api_key = "ollama"
 
-cd api调用实战/cli-chat
+cd ../../phase1-api/cli-chat
 python benchmark.py --prompt medium --runs 3
 ```
 

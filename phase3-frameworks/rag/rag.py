@@ -53,7 +53,7 @@ def resolve_env(value: Any) -> Any:
 
 def load_llm_config() -> dict[str, str]:
     """从 CLI 客户端的 config.toml 读取 LLM 配置"""
-    config_path = Path(__file__).parent.parent / "cli-chat" / "config.toml"
+    config_path = Path(__file__).parent.parent.parent / "phase1-api" / "cli-chat" / "config.toml"
     if not config_path.exists():
         return DEFAULT_CONFIG
 

@@ -35,7 +35,7 @@
 
 ```powershell
 # 1. 装依赖（只需要两个包）
-cd api调用实战/cli-chat
+cd phase1-api/cli-chat
 pip install openai tomli
 
 # 2. 设置 API Key

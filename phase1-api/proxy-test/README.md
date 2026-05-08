@@ -52,7 +52,7 @@ curl.exe http://localhost:3000
 ## 2. 测试普通请求（非流式）
 
 ```powershell
-cd api调用实战/proxy-test
+cd phase1-api/proxy-test
 
 # 先设环境变量（告诉测试脚本 Proxy 在哪）
 $env:PROXY_BASE_URL = "http://localhost:3000/v1"
@@ -131,7 +131,7 @@ model = "deepseek-chat"               # 或者 Proxy 支持的任意模型名
 ```
 
 ```powershell
-cd api调用实战/cli-chat
+cd ../cli-chat
 python main.py --config config.toml
 ```
 
