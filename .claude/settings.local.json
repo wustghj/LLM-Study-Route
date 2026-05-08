@@ -12,7 +12,9 @@
       "Bash(git add *)",
       "Bash(git commit *)",
       "Bash(pip install *)",
-      "Bash(git mv *)"
+      "Bash(git mv *)",
+      "Bash(rm -rf \"api调用实战/cli-chat\" \"api调用实战/proxy-test\" \"api调用实战/ollama-notes\" \"api调用实战/llama-cpp-notes\" \"api调用实战/rag-demo\" \"api调用实战/agent-demo\" \"api调用实战/finetune-demo\" \"api调用实战/production-demo\" \"api调用实战/advanced-notes\")",
+      "Bash(ls \"api调用实战/\")"
     ]
   }
 }
