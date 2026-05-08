@@ -40,7 +40,7 @@ python main.py --config config.example.toml
 | **Phase 3** | RAG 检索增强 → Agent 智能体 | 想构建应用 | ✅ 已完成 |
 | **Phase 4** | Prompt 工程 → LoRA 微调 | 想让模型听话 | ✅ 已完成 |
 | **Phase 5** | 日志 / 成本 / 压测 / 网关 | 想上线服务 | ✅ 已完成 |
-| **Phase 6** | Transformer → 训练 → 多模态 | 想深入原理 | 🔭 远期 |
+| **Phase 6** | Transformer / 训练 / 多模态 | 想深入原理 | ✅ 已规划 |
 
 **完整路线图：** 打开 `LLM学习路径_完整版.md`
 
@@ -83,6 +83,10 @@ api调用实战/
 │   ├── loadtest.py                   #   并发负载测试
 │   ├── gateway.py                    #   最小 API 网关
 │   └── README.md
+│
+├── advanced-notes/                   # Phase 6：进阶深造
+│   ├── minimal_transformer.py        #   手写 Transformer 前向传播
+│   └── llama-cpp-source-guide.md     #   llama.cpp 源码阅读路线
 │
 ├── LLM学习路径_完整版.md              #   完整学习路线图（从这里开始）
 └── README.md                         #   你正在看的文件

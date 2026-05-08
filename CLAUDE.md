@@ -65,6 +65,10 @@ G:\AI学习路径\
     │   ├── README.md
     │   └── requirements.txt
     │
+    ├── advanced-notes/                 # Phase 6: Advanced
+    │   ├── minimal_transformer.py      #   Numpy Transformer forward pass
+    │   └── llama-cpp-source-guide.md   #   llama.cpp source reading guide
+    │
     ├── 大模型自顶向下图解.md              # LLM architecture diagram
     └── 短视频文案-普通工程师学大模型.md
 ```
@@ -82,7 +86,7 @@ The complete learning roadmap is in `LLM学习路径_完整版.md` (7 layers, Pr
 | 3 | Frameworks — RAG, Agent, Function Calling | ✅ Complete | `rag-demo/rag.py`, `agent-demo/agent.py` |
 | 4 | Customization — Prompt Engineering, LoRA | ✅ Complete | `finetune-demo/` (3 files) |
 | 5 | Production Engineering — logging, cost, load testing, gateway | ✅ Complete | `production-demo/` (4 files) |
-| 6 | Advanced — Transformer, training, multimodal | 🔭 Future | — |
+| 6 | Advanced — Transformer, training, llama.cpp source | ✅ Planned | `advanced-notes/` (2 files) |
 
 ## Key Architecture
 

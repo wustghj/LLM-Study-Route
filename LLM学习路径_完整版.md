@@ -509,24 +509,122 @@ LLM 也是这样：它把之前计算过的中间结果（Key 和 Value 向量�
 
 ---
 
-## Phase 6：进阶深造（长期） 🔭 远期
+## Phase 6：进阶深造（长期） 🔭 已规划
 
-> 目标：深入原理，具备独立研究和优化能力。
+> 目标：打开最后一个黑盒——理解 Transformer 内部到底在算什么。
 
-### 推荐顺序（不要从论文开始！）
+### Phase 6 和其他阶段有什么不同
 
-1. **先看图解：** [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/) ← 有中文翻译
-2. **再看视频：** [3Blue1Brown 注意力机制系列](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi)
-3. **最后读论文：** "Attention Is All You Need"
+Phase 1-5 是"用和造"——调 API、跑推理、构建应用、做网关。Phase 6 是"拆和懂"——把 Transformer 拆开看里面每一块在做什么。
 
-### 学习专题
+这里没有"产品"，只有理解深度。对于一个 C++ 后端工程师，Phase 6 的超级能力是：**能读懂 llama.cpp 源码，知道推理引擎的每一行在做什么。**
 
-| 专题 | 核心问题 |
-|------|---------|
-| Transformer 架构 | Attention 到底是怎么算的？为什么能并行？ |
-| 训练三阶段 | 预训练→SFT→RLHF 各做什么？为什么需要三个阶段？ |
-| 多模态 | 图片/语音怎么"喂"给 LLM？ |
-| 模型压缩 | 量化/蒸馏/剪枝——怎么让大模型跑在手机上？ |
+### 四个学习专题
+
+| Track | 专题 | 方式 | 产出 |
+|-------|------|------|------|
+| **6A** | Transformer 架构 | 手写 numpy 前向传播 | `advanced-notes/minimal_transformer.py` |
+| **6B** | llama.cpp 源码 | 按路线图阅读 C++ 源码 | `advanced-notes/llama-cpp-source-guide.md` |
+| **6C** | 训练原理 | 理解三阶段训练流程 | 阅读笔记 |
+| **6D** | 模型压缩与部署 | 量化/蒸馏/ONNX 概念 | 阅读笔记 |
+
+### Track 6A：手写 Transformer 前向传播
+
+**做什么：** 用纯 numpy 实现 Transformer 的一次推理（不含训练），打印每一步的数据形状，让你看到 Attention 到底在算什么。
+
+**文件：** `advanced-notes/minimal_transformer.py`
+
+**你会看到：**
+- token → embedding 查表 → + 位置编码
+- 多头注意力：Q、K、V 投影 → 切分 → 点积 → softmax → 加权求和
+- 前馈网络：升维 → ReLU → 降维
+- 残差连接 + 层归一化
+- 最后的 logits（每个位置对词汇表的"倾向"）
+
+**为什么这会改变你的理解：** 你调了一年 `chat.completions.create()`——这个 demo 让你看到，它底层就是一堆矩阵乘法 + softmax。没有魔法，只有线性代数。
+
+```powershell
+pip install numpy
+cd api调用实战/advanced-notes
+python minimal_transformer.py
+```
+
+### Track 6B：阅读 llama.cpp 源码
+
+**做什么：** 用 C++ 后端工程师的身份，读业界最流行的推理引擎源码。
+
+**文件：** `advanced-notes/llama-cpp-source-guide.md`
+
+**五站阅读路线：**
+
+| 站 | 文件 | 要回答的问题 | 时间 |
+|----|------|-------------|------|
+| 1 | `llama-model.cpp` | GGUF 文件怎么加载到内存？ | 30min |
+| 2 | `llama.cpp:llama_decode()` | 一次推理的完整流程 | 1h |
+| 3 | KV Cache 结构体 | Phase 2 学的 KV Cache 在 C++ 里长什么样？ | 45min |
+| 4 | `ggml-quants.c` | Q4_K_M 的权重在推理时怎么反量化？ | 30min |
+| 5 | `ggml.h / ggml.c` | llama.cpp 的"深度学习框架"怎么造的？ | 1h |
+
+**这是 Phase 6 最有价值的部分。** 作为 C++ 后端工程师，读懂 llama.cpp 意味着你能：
+- 自己优化推理引擎
+- 接入新的硬件后端
+- 理解性能瓶颈的根本原因
+
+### Track 6C：训练原理（概念层）
+
+**做什么：** 理解一个 LLM 是怎么"造"出来的——三阶段训练流程。
+
+**不需要动手训练**（那需要几百张 GPU），但要理解每个阶段做什么：
+
+```
+预训练（Pre-training）
+  ├─ 输入：几万亿 token 的文本（整个互联网）
+  ├─ 目标：预测下一个 token（自监督学习）
+  ├─ 产出：Base Model（会续写，不会聊天）
+  └─ 成本：几百万到几亿美元
+
+监督微调（SFT）
+  ├─ 输入：几万条人工标注的"问题→理想回答"
+  ├─ 目标：学会对话格式和遵循指令
+  ├─ 产出：Instruct Model（会聊天了）
+  └─ 成本：几千到几万美元
+
+RLHF / DPO（对齐）
+  ├─ 输入：人类对回答的偏好排序（A > B > C）
+  ├─ 目标：让回答符合人类价值观（有用、无害、诚实）
+  ├─ 产出：Chat Model（最终产品）
+  └─ 成本：几万美元
+```
+
+**你已经做过的：** Phase 4 的 LoRA 微调就是 SFT 的极简版——用 200 条数据、一张显卡、几分钟，做了一次小规模 SFT。
+
+**推荐阅读顺序：**
+1. [Andrej Karpathy — Let's build GPT from scratch](https://www.youtube.com/watch?v=kCc8FmEb1nY)（视频，2h，手写 GPT 训练代码）
+2. [Hugging Face NLP Course — 第 1-3 章](https://huggingface.co/learn/nlp-course)（文本教程，理解 tokenizer + 预训练模型）
+3. [Illustrated RLHF](https://huggingface.co/blog/rlhf)（博客，15min 阅读）
+
+### Track 6D：模型压缩与部署
+
+**做什么：** 理解怎么让大模型跑在资源受限的设备上。
+
+| 技术 | 一句话 | 你什么时候用 |
+|------|--------|------------|
+| **量化** | 把 FP16 权重压成 INT8/INT4 | 你每次用 GGUF 模型都在用量化 |
+| **蒸馏** | 大模型教小模型（用大模型的输出训练小模型） | 想在手机上跑模型的时候 |
+| **剪枝** | 删除不重要的权重 | 学术场景居多，工业用得少 |
+| **ONNX / TensorRT** | 跨平台模型格式 + NVIDIA 推理优化 | 把 Python 模型部署到 C++ 生产环境 |
+
+**你已经用过的：** llama.cpp + GGUF = 量化推理的完整实现。Phase 2 的量化实验已经让你对"精度换空间"有了直觉。
+
+---
+
+### Phase 6 验收
+
+- [ ] 能对着 `minimal_transformer.py` 的每一步说出"数据是什么形状、在做什么运算"
+- [ ] 能用一句话解释 Self-Attention：Q 和 K 算相似度 → softmax 变概率 → 加权取 V
+- [ ] 能在 llama.cpp 源码中找到 `llama_decode()` 和 KV Cache 结构体
+- [ ] 能说出训练三阶段各自的输入、目标和产出
+- [ ] 能解释：为什么量化主要省显存，而不是省计算？
 
 ---
 
