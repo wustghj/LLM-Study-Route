@@ -5,6 +5,14 @@
 
 ---
 
+## 三条阅读路线
+
+- **[先搞懂 LLM 到底是什么](docs/start-here.md)** — 30 分钟建立完整心智模型
+- **[直接开始系统学习](docs/learning-path.md)** — 7 Phase 课程表，从 API 到源码
+- **[遇到困惑查一下](docs/faq.md)** — 20 个最常见问题，随时查阅
+
+---
+
 ## 快速开始
 
 ```powershell
@@ -45,18 +53,6 @@ Phase 7  源码深水区      llama.cpp C++ 源码阅读（可选）
 ```
 
 详见 `docs/learning-path.md`。
-
----
-
-## 三条阅读路线
-
-| 你想要 | 读这个 | 时间 |
-|--------|--------|------|
-| **先搞懂 LLM 到底是什么** | `docs/start-here.md` | 30 分钟 |
-| **直接开始系统学习** | `docs/learning-path.md` | 7 Phase 课程表 |
-| **遇到困惑查一下** | `docs/faq.md` | 随时 |
-
----
 
 ## 项目结构
 
