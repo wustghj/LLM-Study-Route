@@ -53,7 +53,7 @@ def resolve_env(value: Any) -> Any:
 
 
 def load_config() -> dict[str, str]:
-    path = Path(__file__).parent.parent.parent / "phase1-api" / "cli-chat" / "config.toml"
+    path = Path(__file__).parent.parent.parent / "phase1-api" / "config.toml"
     if not path.exists():
         return DEFAULT_CONFIG
     with path.open("rb") as f:
