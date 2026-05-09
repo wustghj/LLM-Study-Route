@@ -22,7 +22,7 @@ except ModuleNotFoundError:
 
 
 DEFAULT_CONFIG = {
-    "api_key": "$DEEPSEEK_API_KEY",
+    "api_key": "sk-dae11c7987c2480490de024667ba7a50",
     "base_url": "https://api.deepseek.com",
     "model": "deepseek-chat",
     "system_prompt": "你是一个简洁、可靠的编程助手。",
