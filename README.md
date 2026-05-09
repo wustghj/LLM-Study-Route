@@ -1,22 +1,22 @@
 # LLM 从零到精通 — 动手实战学习路径
 
 > 零基础、不啃论文、不背公式。先跑起来，再理解原理。
-> 30 分钟建立完整认知 → 6 个 Phase 逐步深入 → 成为 LLM 工程专家。
+> 30 分钟建立完整认知 → 7 个 Phase 逐步深入 → 成为 LLM 工程专家。
 
 ---
 
 ## 快速开始
 
 ```powershell
-# 0. 确保装了 Python 3.10+（python.org 下载，勾选 Add to PATH）
-python --version
+# 0. 检查环境
+python tools/check_env.py
 
 # 1. 获取 API Key（platform.deepseek.com 免费注册）
 $env:DEEPSEEK_API_KEY = "sk-你的key"
 
 # 2. 装依赖 + 跑第一次对话
-cd phase1-api/cli-chat
-pip install openai tomli
+cd phase1-api
+pip install -r requirements.txt
 python main.py --config config.example.toml
 ```
 
@@ -24,69 +24,135 @@ python main.py --config config.example.toml
 
 ---
 
-## 两条阅读路线(必读)
+## 学习路径
+
+```
+Phase 0  基础认知        30 分钟纯阅读，建立心智模型
+   ↓
+Phase 1  API 精通        调 SDK、手写 HTTP、多 provider benchmark
+   ↓
+Phase 2  模型内部        纯 numpy 手写 Transformer 前向传播 ★
+   ↓
+Phase 3  本地部署        Ollama、llama.cpp、KV Cache、量化实验
+   ↓
+Phase 4  应用构建        RAG 检索增强 + Agent 智能体
+   ↓
+Phase 5  模型定制        Prompt Engineering + LoRA 微调
+   ↓
+Phase 6  生产上线        日志、成本、压测、网关
+   ↓
+Phase 7  源码深水区      llama.cpp C++ 源码阅读（可选）
+```
+
+详见 `docs/learning-path.md`。
+
+---
+
+## 三条阅读路线
 
 | 你想要 | 读这个 | 时间 |
 |--------|--------|------|
-| **先搞懂 LLM 到底是什么** | [`START-HERE.md`](START-HERE.md) | 30 分钟 |
-| **直接开始系统学习** | [`LEARNING-PATH.md`](LEARNING-PATH.md) | 6 Phase 课程表 |
-| **遇到困惑查一下** | [`FAQ.md`](FAQ.md) | 随时 |
+| **先搞懂 LLM 到底是什么** | `docs/start-here.md` | 30 分钟 |
+| **直接开始系统学习** | `docs/learning-path.md` | 7 Phase 课程表 |
+| **遇到困惑查一下** | `docs/faq.md` | 随时 |
 
 ---
 
 ## 项目结构
 
 ```
-├── START-HERE.md          ← 纯小白入口：30 分钟搞懂 LLM
-├── LEARNING-PATH.md       ← 完整 6 Phase 课程表
-├── FAQ.md                 ← 20 个最常见问题
-├── README.md              ← 你在这里
+├── README.md                    ← 项目入口
+├── CLAUDE.md                    ← Claude Code 配置
+├── .gitignore
+├── .github/workflows/           ← CI
 │
-├── concepts/              ← 概念深度解析
-│   ├── llm-architecture.md    LLM 架构全景图
-│   ├── tokenization.md        Token 完全解释
-│   ├── embedding.md           Embedding 完全解释
-│   └── training.md            训练三阶段故事
+├── docs/                        ← 📚 全部阅读材料
+│   ├── start-here.md
+│   ├── learning-path.md
+│   ├── faq.md
+│   ├── concepts/                ← Token/Embedding/Training/架构
+│   ├── guides/                  ← Prompt Engineering 手册
+│   └── appendix/                ← 术语表/排错/资源
 │
-├── guides/                ← 实用技巧
-│   └── prompt-engineering.md  10 个 Prompt 技巧
+├── phase0-fundamentals/         ← Phase 0：基础认知
+├── phase1-api/                  ← Phase 1：API 精通
+├── phase2-transformer/          ← Phase 2：Transformer 内部
+├── phase3-local-deploy/         ← Phase 3：本地部署
+├── phase4-apps/                 ← Phase 4：RAG + Agent
+├── phase5-customize/            ← Phase 5：Prompt + LoRA
+├── phase6-production/           ← Phase 6：日志/成本/网关
+├── phase7-source/               ← Phase 7：llama.cpp 源码
 │
-├── phase1-api/            ← Phase 1：API 调用 + 本地部署
-│   ├── cli-chat/              聊天客户端（SDK + 纯 HTTP）
-│   ├── proxy-test/            代理测试
-│   └── ollama/                本地模型部署
-│
-├── phase2-inference/      ← Phase 2：推理引擎
-│   └── llama-cpp/             编译、KV Cache、6 个实验
-│
-├── phase3-frameworks/     ← Phase 3：应用框架
-│   ├── rag/                   RAG 检索增强生成
-│   └── agent/                 Agent 智能体
-│
-├── phase4-finetuning/     ← Phase 4：模型微调
-│   └── finetune/              QLoRA 训练流水线
-│
-├── phase5-production/     ← Phase 5：生产化
-│   ├── logger.py              结构化日志
-│   ├── cost.py                成本计算器
-│   ├── loadtest.py            并发压测
-│   └── gateway.py             API 网关
-│
-└── phase6-advanced/       ← Phase 6：进阶深造
-    ├── transformer.py         手写 Transformer
-    └── llama-cpp-guide.md     C++ 推理引擎源码阅读
+├── projects/                    ← 🔗 综合实战
+└── tools/                       ← 辅助工具
 ```
 
 ---
 
-## 学习路线
+## 各 Phase 快速链接
 
-```
-START-HERE.md（30 分钟）
-      ↓
-Phase 1   →  Phase 2   →  Phase 3   →  Phase 4   →  Phase 5   →  Phase 6
-调 API        推理引擎      RAG+Agent     LoRA 微调     生产化        进阶
-1-2 周        2-4 周       2-4 周       2-4 周       2-3 周       长期
+| Phase | 目录 | 快速开始 |
+|-------|------|---------|
+| 0 — 基础认知 | `phase0-fundamentals/` | 读 `docs/start-here.md` |
+| 1 — API 精通 | `phase1-api/` | `python main.py` |
+| 2 — 模型内部 | `phase2-transformer/` | `python transformer_annotated.py` |
+| 3 — 本地部署 | `phase3-local-deploy/` | `ollama pull qwen2.5:7b` |
+| 4 — 应用构建 | `phase4-apps/` | `cd rag && python rag.py --compare` |
+| 5 — 模型定制 | `phase5-customize/` | `cd finetune && python inference.py` |
+| 6 — 生产上线 | `phase6-production/` | `python gateway.py` |
+| 7 — 源码深水区 | `phase7-source/` | 读 `llama-cpp-guide.md` |
+
+---
+
+## 运行速查
+
+```powershell
+# Phase 1 — CLI Chat
+cd phase1-api
+pip install -r requirements.txt
+python main.py --config config.example.toml
+
+# Phase 2 — Transformer
+cd phase2-transformer
+pip install numpy
+python transformer_annotated.py
+
+# Phase 3 — 本地模型 (需先装 Ollama)
+ollama pull qwen2.5:7b
+
+# Phase 4 — RAG
+cd phase4-apps/rag
+pip install -r requirements.txt
+python rag.py --query "什么是 KV Cache？" --compare
+
+# Phase 4 — Agent
+cd phase4-apps/agent
+pip install -r requirements.txt
+python agent.py
+
+# Phase 5 — 微调
+cd phase5-customize/finetune
+pip install -r requirements.txt
+python prepare_data.py
+python train.py --model-name Qwen/Qwen2.5-1.5B-Instruct
+python inference.py
+
+# Phase 6 — 生产工具
+cd phase6-production
+python logger.py
+python cost.py
+# loadtest.py 需要: pip install aiohttp
+# gateway.py 需要: pip install fastapi uvicorn aiohttp
+
+# Phase 7 — 源码阅读
+# 读 phase7-source/llama-cpp-guide.md
 ```
 
-每个 Phase 都有可运行的代码、明确的验收标准和可测量的指标。
+---
+
+## 设计原则
+
+- **Provider-agnostic**: 一个客户端，只改配置切换 DeepSeek/Ollama/Proxy
+- **Minimal dependencies**: 早期 Phase 尽量少装包
+- **Measurable learning**: 每次调用输出 `first_token_ms` 和 `total_ms`
+- **Progressive complexity**: 每层的难度递增，没有跳跃
