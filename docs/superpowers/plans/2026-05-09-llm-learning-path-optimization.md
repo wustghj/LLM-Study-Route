@@ -585,7 +585,7 @@ def load_config() -> dict[str, str]:
 
 将 `phase1-api/main.py` 第 25 行的硬编码 Key：
 ```python
-"api_key": "sk-dae11c7987c2480490de024667ba7a50",
+"api_key": "sk-你的key",
 ```
 改为：
 ```python
@@ -2439,6 +2439,6 @@ git commit -m "chore: final verification and cleanup"
 
 ## 安全注意事项
 
-1. **main.py 第 25 行硬编码了 API Key** `sk-dae11c7987c2480490de024667ba7a50` — Task 2.6 Step 3 会修复。**建议用户立即去 DeepSeek 平台 revoke 这个 key。**
+1. **main.py 第 25 行硬编码了 API Key** `sk-你的key` — Task 2.6 Step 3 已修复。**建议用户立即去 DeepSeek 平台 revoke 旧 key（如果曾泄露）。**
 2. 所有 `.toml` 文件（除 `*.example.toml`）已被 `.gitignore` 排除
 3. `conversations/` 和 `logs/` 目录已被 `.gitignore` 排除
