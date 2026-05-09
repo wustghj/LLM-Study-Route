@@ -1,22 +1,41 @@
+# 配置文件（含密钥）
+*.toml
+!*.example.toml
+
+# 运行时数据
+conversations/
+logs/
+*.jsonl
+
 # Python
 __pycache__/
 *.pyc
 *.pyo
-
-# Virtual environment
 .venv/
-env/
+venv/
+*.egg-info/
+dist/
 
-# API keys and config
-phase1-api/cli-chat/config.toml
+# 模型文件（太大）
+*.gguf
+*.bin
+*.safetensors
+*.pth
+*.ckpt
 
-# Conversation history
-phase1-api/cli-chat/conversations/
+# 系统文件
+.DS_Store
+Thumbs.db
 
 # IDE
 .vscode/
 .idea/
 
-# OS
-.DS_Store
-Thumbs.db
+# 临时文件
+*.tmp
+*.swp
+
+# 训练输出
+checkpoints/
+output/
+wandb/
