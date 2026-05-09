@@ -10,67 +10,84 @@ A hands-on LLM learning project for beginners. Core philosophy: **run first, und
 
 ```
 ├── README.md                    # Entry point
-├── START-HERE.md                # 30-min narrative guide for absolute beginners
-├── LEARNING-PATH.md             # Complete 6-phase curriculum
-├── FAQ.md                       # 20 most common beginner questions
+├── START-HERE.md                # (moved to docs/start-here.md)
+├── LEARNING-PATH.md             # (moved to docs/learning-path.md)
+├── FAQ.md                       # (moved to docs/faq.md)
 ├── CLAUDE.md                    # This file
 ├── .gitignore
 │
-├── concepts/                    # Concept deep-dives
-│   ├── llm-architecture.md      #   Full LLM architecture diagram
-│   ├── tokenization.md          #   Why Chinese costs more tokens than English
-│   ├── embedding.md             #   How words become vectors
-│   └── training.md              #   3-stage training: pretrain -> SFT -> RLHF
+├── docs/                        # All reading materials
+│   ├── start-here.md            #   30-min narrative guide
+│   ├── learning-path.md         #   7-phase curriculum
+│   ├── faq.md                   #   20 most common questions
+│   ├── concepts/                #   Concept deep-dives (4 files)
+│   ├── guides/                  #   Prompt engineering handbook
+│   └── appendix/                #   Glossary, troubleshooting, resources
 │
-├── guides/                      # Practical guides
-│   └── prompt-engineering.md    #   10 prompt techniques with before/after
-│
-├── phase1-api/                  # Phase 1: API & local deployment
-│   ├── cli-chat/                #   Chat client (SDK + raw HTTP)
+├── phase0-fundamentals/         # Phase 0: Foundation (reading only)
+├── phase1-api/                  # Phase 1: API mastery
 │   ├── proxy-test/              #   Proxy verification scripts
-│   └── ollama/                  #   Local model deployment notes
+│   ├── exercises/               #   Hands-on exercises
+│   ├── main.py                  #   SDK-based chat client
+│   ├── raw_client.py            #   Raw HTTP chat client
+│   └── benchmark.py             #   Multi-provider performance benchmark
 │
-├── phase2-inference/            # Phase 2: Inference engine
-│   └── llama-cpp/               #   Build, KV Cache, experiments
+├── phase2-transformer/          # Phase 2: Transformer internals
+│   ├── exercises/               #   Hands-on exercises
+│   ├── transformer_annotated.py #   Teaching version (prints shapes)
+│   ├── transformer.py           #   Clean version
+│   └── attention_viz.py         #   Attention weight visualization
 │
-├── phase3-frameworks/           # Phase 3: Application frameworks
+├── phase3-local-deploy/         # Phase 3: Local deployment
+│   ├── experiments/             #   Automated experiment scripts
+│   ├── exercises/               #   Hands-on exercises
+│   ├── getting-started.md       #   llama.cpp build guide
+│   ├── kv-cache.md              #   KV Cache deep-dive
+│   └── experiments.md           #   6 experiments manual
+│
+├── phase4-apps/                 # Phase 4: Application frameworks
 │   ├── rag/                     #   RAG system
 │   └── agent/                   #   Function Calling agent
 │
-├── phase4-finetuning/           # Phase 4: Model customization
+├── phase5-customize/            # Phase 5: Model customization
 │   └── finetune/                #   QLoRA training pipeline
 │
-├── phase5-production/           # Phase 5: Production engineering
+├── phase6-production/           # Phase 6: Production engineering
 │   ├── logger.py                #   Structured JSON logging
 │   ├── cost.py                  #   Multi-provider cost tracker
 │   ├── loadtest.py              #   Concurrent load testing
-│   ├── gateway.py               #   Minimal LLM API gateway
-│   ├── README.md
-│   └── requirements.txt
+│   └── gateway.py               #   Minimal LLM API gateway
 │
-└── phase6-advanced/             # Phase 6: Advanced study
-    ├── transformer.py           #   Pure numpy Transformer forward pass
-    └── llama-cpp-guide.md       #   llama.cpp C++ source reading guide
+├── phase7-source/               # Phase 7: Advanced — source reading
+│   └── llama-cpp-guide.md       #   llama.cpp C++ source reading guide
+│
+├── projects/                    # Capstone projects
+│   ├── 01-personal-knowledge-base/
+│   └── 02-code-review-bot/
+│
+└── tools/                       # Utility scripts
+    └── check_env.py             #   Environment checker
 ```
 
 ## Learning Path Overview
 
-The complete learning roadmap is in `LEARNING-PATH.md` (7 layers, Pre-Phase -> Phase 6):
+The complete learning roadmap is in `docs/learning-path.md` (9 layers, Pre-Phase -> Phase 7):
 
 | Layer | Focus | Status | Key Files |
 |-------|-------|--------|-----------|
-| Pre-Phase | 5-min quickstart | Ready | `phase1-api/cli-chat/main.py` |
-| 0 | Foundation — what is LLM, terminology | Ready | `concepts/llm-architecture.md` |
-| 1 | Application — API, local model, proxy, benchmarks | Complete | `phase1-api/` |
-| 2 | Inference — llama.cpp, KV Cache, experiments | Complete | `phase2-inference/llama-cpp/` |
-| 3 | Frameworks — RAG, Agent, Function Calling | Complete | `phase3-frameworks/` |
-| 4 | Customization — Prompt Engineering, LoRA | Complete | `phase4-finetuning/finetune/` |
-| 5 | Production — logging, cost, load testing, gateway | Complete | `phase5-production/` |
-| 6 | Advanced — Transformer, training, llama.cpp source | Planned | `phase6-advanced/` |
+| Pre-Phase | 5-min quickstart | Ready | `phase1-api/main.py` |
+| 0 | Foundation — what is LLM, terminology | Ready | `docs/start-here.md` |
+| 1 | Application — API, local model, proxy, benchmarks | Ready | `phase1-api/` |
+| 2 | Transformer — numpy forward pass, Attention viz | Ready | `phase2-transformer/` |
+| 3 | Local deploy — Ollama, llama.cpp, KV Cache, experiments | Ready | `phase3-local-deploy/` |
+| 4 | Frameworks — RAG, Agent, Function Calling | Ready | `phase4-apps/` |
+| 5 | Customization — Prompt Engineering, LoRA | Ready | `phase5-customize/finetune/` |
+| 6 | Production — logging, cost, load testing, gateway | Ready | `phase6-production/` |
+| 7 | Advanced — llama.cpp source reading | Ready | `phase7-source/` |
 
 ## Key Architecture
 
-### CLI Chat Client (`phase1-api/cli-chat/main.py`)
+### CLI Chat Client (`phase1-api/main.py`)
 
 Single-file client: TOML config with `$ENV_VAR` interpolation, multi-turn conversation with JSON persistence, OpenAI SDK streaming with `first_token_ms` and `total_ms` metrics, typed error handling (auth/rate-limit/timeout/connection).
 
@@ -78,15 +95,15 @@ Supporting files:
 - `raw_client.py` — Same features using raw `urllib` (no OpenAI SDK)
 - `benchmark.py` — Multi-provider performance comparison -> CSV
 
-### RAG Demo (`phase3-frameworks/rag/rag.py`)
+### RAG Demo (`phase4-apps/rag/rag.py`)
 
 Documents -> chunks -> vectorize (sentence-transformers) -> similarity search -> feed context to LLM. `--compare` mode shows with/without RAG.
 
-### Agent Demo (`phase3-frameworks/agent/agent.py`)
+### Agent Demo (`phase4-apps/agent/agent.py`)
 
 Function Calling agent: LLM decides answer or tool call -> execute tool -> feedback loop. Tools: calculator, current time, directory listing.
 
-### Fine-tuning Demo (`phase4-finetuning/finetune/`)
+### Fine-tuning Demo (`phase5-customize/finetune/`)
 
 Three-stage QLoRA pipeline: `prepare_data.py` (200 records) -> `train.py` (4-bit, ~4GB VRAM) -> `inference.py` (before/after comparison).
 
@@ -95,9 +112,9 @@ Three-stage QLoRA pipeline: `prepare_data.py` (200 records) -> `train.py` (4-bit
 ```powershell
 # Phase 1 — CLI Chat
 $env:DEEPSEEK_API_KEY = "sk-..."
-cd phase1-api/cli-chat
-python main.py --config config.toml
-python raw_client.py --config config.toml
+cd phase1-api
+python main.py --config config.example.toml
+python raw_client.py --config config.example.toml
 python benchmark.py --prompt medium --runs 3
 
 # Phase 1 — Proxy tests (stdlib only)
@@ -107,31 +124,42 @@ $env:PROXY_API_KEY = "test-key"
 python test_chat.py
 python test_stream.py
 
-# Phase 3 — RAG
-cd phase3-frameworks/rag
+# Phase 2 — Transformer
+cd phase2-transformer
+pip install numpy
+python transformer_annotated.py
+python transformer.py
+python attention_viz.py
+
+# Phase 3 — Local deployment
+ollama pull qwen2.5:7b
+cd phase3-local-deploy
+python kv_cache_viz.py
+
+# Phase 4 — RAG
+cd phase4-apps/rag
 pip install sentence-transformers numpy openai tomli
 python rag.py --query "what is KV Cache?" --compare
 
-# Phase 3 — Agent
-cd phase3-frameworks/agent
+# Phase 4 — Agent
+cd phase4-apps/agent
 python agent.py
 
-# Phase 4 — Fine-tuning
-cd phase4-finetuning/finetune
+# Phase 5 — Fine-tuning
+cd phase5-customize/finetune
 python prepare_data.py
 python train.py --model-name Qwen/Qwen2.5-1.5B-Instruct
 python inference.py
 
-# Phase 5 — Production tools
-cd phase5-production
+# Phase 6 — Production tools
+cd phase6-production
 python logger.py    # stdlib only
 python cost.py      # stdlib only
 # loadtest.py needs: pip install aiohttp
 # gateway.py needs: pip install fastapi uvicorn aiohttp
 
-# Phase 6 — Advanced
-cd phase6-advanced
-python transformer.py   # needs: pip install numpy
+# Phase 7 — Source reading
+# Read phase7-source/llama-cpp-guide.md
 ```
 
 ## Design Principles
